@@ -61,12 +61,26 @@ class DayCalories(models.Model):
     def __str__(self):
         return '{user}-{day}'.format(day=self.day, user=self.user.username)
 
-    def day_summary(self):
-        print(self)
+    def sum_calories(self):
         all_portions = self.user_portion.all()
         total_calories = 0
         for item in all_portions:
             total_calories = total_calories + (item.weight/100) * item.product.calories
-        return 'SUM of todays(selected) calories is: {total_calories}'.format(
+        return '{total_calories:.2f}'.format(
             total_calories=total_calories
+        )
+
+    def total_nutrients(self):
+        all_portions = self.user_portion.all()
+        total_proteins = 0
+        total_fats = 0
+        total_carbohydrates = 0
+        for item in all_portions:
+            total_proteins = total_proteins + (item.weight/100) * item.product.proteins
+            total_fats = total_fats + (item.weight/100) * item.product.fats
+            total_carbohydrates = total_carbohydrates + (item.weight/100) * item.product.carbohydrates
+        return 'Proteins: {total_proteins:.2f};\nFats: {total_fats:.2f}; \nCarbohydrates: {total_carbohydrates:.2f};'.format(
+            total_proteins=total_proteins,
+            total_fats=total_fats,
+            total_carbohydrates=total_carbohydrates
         )

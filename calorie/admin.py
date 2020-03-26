@@ -25,12 +25,15 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(DayCalories)
 class DayCaloriesAdmin(admin.ModelAdmin):
-    list_display = ['day', 'user', 'id', 'day_summary']
-    readonly_fields = ('added_day', 'day_summary')
+    list_display = ['day', 'user', 'id', 'sum_calories', 'total_nutrients']
+    readonly_fields = ('added_day', 'sum_calories', 'total_nutrients')
     filter_horizontal = ('user_portion', )
     # inlines = (DayCaloriesInline,)
     # exclude = ('user_portion',)
     # raw_id_fields = ('user_portion', )
 
-    def day_summary(self, obj):
-        return obj.day_summary()
+    def sum_calories(self, obj):
+        return obj.sum_calories()
+
+    def total_nutrients(self, obj):
+        return obj.total_nutrients()
