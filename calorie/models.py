@@ -1,0 +1,72 @@
+from django.contrib.auth.models import User
+from django.db import models
+
+# Create your models here.
+
+
+FOOD_TYPE_TIME = (
+    (1, "Завтрак"),
+    (2, "Обед"),
+    (3, "Ужин"),
+    (4, "Перекус"),
+)
+
+
+class Product(models.Model):
+    title = models.CharField(max_length=256)
+    calories = models.FloatField(default=0)
+    added_day = models.DateTimeField(auto_now_add=True)
+    edited_day = models.DateTimeField(auto_now=True)
+    proteins = models.FloatField(default=0)
+    fats = models.FloatField(default=0)
+    carbohydrates = models.FloatField(default=0)
+
+    class Meta:
+        unique_together = ('title', 'calories')
+
+    def __str__(self):
+        return '{title}-{calories}'.format(title=self.title, calories=self.calories)
+
+
+class UserPortion(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    weight = models.FloatField(default=0)
+    user = models.ForeignKey(User, blank=False,  on_delete=models.CASCADE)
+    added_day = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField()
+    eating = models.IntegerField(choices=FOOD_TYPE_TIME, default=4)
+
+    def __str__(self):
+        weight = '{weight} gr'.format(weight=self.weight)
+        day = self.added_day.strftime('%Y-%m-%d')
+        eating = FOOD_TYPE_TIME[self.eating-1][1]
+        return '{product}-{weight}-{user}-{day}-{eating}'.format(
+            product=self.product.title,
+            weight=weight,
+            user=self.user.username,
+            day=day,
+            eating=eating
+        )
+
+
+class DayCalories(models.Model):
+    user_portion = models.ManyToManyField(UserPortion)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    day = models.DateField()
+    added_day = models.DateField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = 'Day Calories'
+
+    def __str__(self):
+        return '{user}-{day}'.format(day=self.day, user=self.user.username)
+
+    def day_summary(self):
+        print(self)
+        all_portions = self.user_portion.all()
+        total_calories = 0
+        for item in all_portions:
+            total_calories = total_calories + (item.weight/100) * item.product.calories
+        return 'SUM of todays(selected) calories is: {total_calories}'.format(
+            total_calories=total_calories
+        )
