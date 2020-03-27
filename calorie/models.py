@@ -38,7 +38,7 @@ class UserPortion(models.Model):
 
     def __str__(self):
         weight = '{weight} gr'.format(weight=self.weight)
-        day = self.added_day.strftime('%Y-%m-%d')
+        day = self.date.strftime('%Y-%m-%d')
         eating = FOOD_TYPE_TIME[self.eating-1][1]
         return '{product}-{weight}-{user}-{day}-{eating}'.format(
             product=self.product.title,
