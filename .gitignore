@@ -7,7 +7,7 @@ venv/
 __pycache__
 node_modules/*
 
-# static files
+# dist files
 staticfiles
 static
 
@@ -19,6 +19,7 @@ static
 /out-tsc
 dist
 node_modules
+package-lock.json
 
 # dependencies
 /node_modules
