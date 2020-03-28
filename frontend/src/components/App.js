@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 
+import AppRouter from './Header'
 
 class App extends Component {
     render() {
         return (
-            <div>
-                <h1>My React App!</h1>
+            <div className="jumbotron">
+                <h2>Welcome to my Personal Calorie Calculator App!</h2>
+                <AppRouter/>
             </div>
-        );
+
+    );
     }
 }
 

@@ -46,7 +46,7 @@ class DayCaloriesAdmin(admin.ModelAdmin):
             today = date.today()
             kwargs["queryset"] = UserPortion.objects.filter(
                 date__year=str(today.year),
-                date__month = str(today.month),
+                date__month=str(today.month),
                 date__day=str(today.day)
             )
         return super(DayCaloriesAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
