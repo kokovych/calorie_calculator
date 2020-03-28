@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
@@ -57,6 +59,7 @@ class DayCalories(models.Model):
 
     class Meta:
         verbose_name_plural = 'Day Calories'
+        unique_together = ('user', 'day')
 
     def __str__(self):
         return '{user}-{day}'.format(day=self.day, user=self.user.username)
@@ -84,3 +87,23 @@ class DayCalories(models.Model):
             total_fats=total_fats,
             total_carbohydrates=total_carbohydrates
         )
+
+
+@receiver(post_save, sender=UserPortion)# the sender is your fix
+def auto_create_or_update_day_calories(sender, instance, **kwargs):
+    created = kwargs.get('created')
+    if created:
+        user = instance.user
+        day = instance.date
+        day_calorie = DayCalories.objects.filter(
+            user=user,
+            day=day
+        )
+        if not day_calorie.exists():
+            day_calorie = DayCalories.objects.create(
+                user=user,
+                day=day
+            )
+            day_calorie.user_portion.add(instance)
+        else:
+            day_calorie.first().user_portion.add(instance)

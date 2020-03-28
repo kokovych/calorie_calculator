@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'calorie',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -127,4 +128,6 @@ STATIC_URL = '/dist/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "frontend"),
 ]
+
+SHELL_PLUS = "ipython"
 
