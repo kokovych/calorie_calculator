@@ -9,7 +9,9 @@ function HomePage() {
     return (
         <div>
             <h2>Home</h2>
-            {/*<div> smt</div>*/}
+            <div>
+                this is home page content!!!
+            </div>
         </div>
     )
 }
@@ -25,13 +27,16 @@ function AppRouter() {
                             <Link to="/">Home</Link>
                         </li>
                         <li>
-                            <a href="http://localhost:8000/admin/" target="_blank">ADMIN PAGE</a>
+                            <a href="/admin/"  target="_blank">ADMIN PAGE</a>
                         </li>
                         <li>
                             <Link to="/login/">Login</Link>
                         </li>
                         <li>
                             <Link to="/registration/">Registration</Link>
+                        </li>
+                        <li>
+                            <Link to="/logout/">Logout</Link>
                         </li>
                     </ul>
                 </nav>
