@@ -25,7 +25,7 @@ function AppRouter() {
                             <Link to="/">Home</Link>
                         </li>
                         <li>
-                            <a href="/admin/" target="_blank">ADMIN PAGE</a>
+                            <a href="http://localhost:8000/admin/" target="_blank">ADMIN PAGE</a>
                         </li>
                         <li>
                             <Link to="/login/">Login</Link>

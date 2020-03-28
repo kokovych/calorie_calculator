@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development ./src/index.js --output ./dist/main_bundle.js",
+    "dev": "webpack-dev-server --hot --open",
     "start": "webpack --mode development --watch",
     "build": "webpack --mode production ./src/index.js --output ./dist/main_bundle.js"
   },
@@ -21,6 +21,7 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
     "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   }
 }
