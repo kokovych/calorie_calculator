@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+import sys
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -69,6 +70,12 @@ TEMPLATES = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+
 WSGI_APPLICATION = 'calorie_calculator.wsgi.application'
 
 
@@ -83,8 +90,17 @@ DATABASES = {
         'PASSWORD': 'calorie',
         'HOST': '127.0.0.1',
         'PORT': '5432',
+        'TEST': {
+            'NAME': 'test_calorie',
+            'USER': 'test_calorie',
+            'PASSWORD': 'test_calorie',
+        }
     }
 }
+
+if 'test' in sys.argv:
+    DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
+    DATABASES['default']['TEST']['NAME'] = 'test_calorie.sqlite3'
 
 
 # Password validation

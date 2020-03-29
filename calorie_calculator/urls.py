@@ -15,11 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView
+)
 
 from calorie.views import index
+from calorie.api import HelloView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/hello/', HelloView.as_view(), name='hello'),
+    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify')
 ]
