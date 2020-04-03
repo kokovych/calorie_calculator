@@ -10,7 +10,7 @@ function HomePage() {
         <div>
             <h2>Home</h2>
             <div>
-                this is home page content!!!
+                this is home page content!!! :)
             </div>
         </div>
     )
@@ -42,8 +42,9 @@ function AppRouter() {
                 </nav>
 
                 <Route exact path="/" component={HomePage} />
-                {/*<Route path="/login/" component={LoginPage} />*/}
-                {/*<Route path="/registration/" component={RegisterPage} />*/}
+                <Route path="/login/" component={HomePage} />
+                <Route path="/registration/" component={HomePage} />
+                <Route path="/logout/" component={HomePage} />
             </div>
 
         </Router>

@@ -23,6 +23,7 @@ class UserPortionAdmin(admin.ModelAdmin):
     readonly_fields = ('added_day', )
     list_filter = ['added_day', 'eating', 'user']
     search_fields = ['product__title']
+    autocomplete_fields = ('product', )
 
 
 @admin.register(DayCalories)

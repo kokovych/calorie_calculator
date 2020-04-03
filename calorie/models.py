@@ -33,7 +33,7 @@ class Product(models.Model):
 class UserPortion(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     weight = models.FloatField(default=0)
-    user = models.ForeignKey(User, blank=False,  on_delete=models.CASCADE)
+    user = models.ForeignKey(User, blank=False,  on_delete=models.CASCADE, default=1)
     added_day = models.DateTimeField(auto_now_add=True)
     date = models.DateTimeField()
     eating = models.IntegerField(choices=FOOD_TYPE_TIME, default=4)

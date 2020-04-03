@@ -98,6 +98,12 @@ DATABASES = {
     }
 }
 
+REACT_ROUTES = [
+    'login',
+    'registration',
+    'logout'
+]
+
 if 'test' in sys.argv:
     DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
     DATABASES['default']['TEST']['NAME'] = 'test_calorie.sqlite3'
