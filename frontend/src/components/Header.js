@@ -8,7 +8,7 @@ function HomePage() {
         <div>
             <h2>Home</h2>
             <div>
-                this is home page content!!! :)
+                this is home page content!!! :) cool
             </div>
         </div>
     )

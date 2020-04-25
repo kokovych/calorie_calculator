@@ -23,6 +23,9 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
+    hot: true,
+    contentBase: path.join(__dirname, "src"),
+    watchContentBase: true
   },
   plugins: [
     new HtmlWebpackPlugin({
