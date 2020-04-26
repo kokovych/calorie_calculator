@@ -8,8 +8,8 @@ import PropTypes from 'prop-types';
 class LoginPage extends Component {
     render() {
         const { userLoginRequest } = this.props;
-        console.log('userLoginRequest');
-        console.log(userLoginRequest);
+        console.log('this.props');
+        console.log(this.props);
         return (
             <div className="row">
                 <h1>This is login page</h1>

@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import {setCurrentUser} from "../../actions/LoginAction"
+import {SET_CURRENT_USER} from "../../constants"
 import InputFieldGroup from '../common/InputFieldGroup'
 import validateLoginForm from '../../validations/login'
 
@@ -37,7 +41,10 @@ class LoginForm extends Component{
 
     onSubmit(e) {
         e.preventDefault();
+        const { dispatch } = this.props;
         console.log('in submit!');
+        console.log(this.props);
+        console.log(dispatch);
         if (this.isValid()) {
             this.setState({errors: {}, isLoading: true});
             let userData = this.state;
@@ -46,10 +53,19 @@ class LoginForm extends Component{
                     console.log("SUCCES");
                     let accessToken = data.data.access;
                     let refreshToken = data.data.refresh;
+                    let tokens = {
+                        "tokens":{
+                            "accessToken": accessToken,
+                            "refreshToken": refreshToken
+                        }
+                    };
                     localStorage.setItem('userAccessToken', accessToken);
                     localStorage.setItem('userRefreshToken', refreshToken);
+                    dispatch(setCurrentUser(accessToken));
                     this.setState({errors: {}, isLoading: false});
                     this.props.history.push('/');
+                    console.log('after push /');
+
                 },
                 (err) => {
                     console.log("error :) ");
@@ -99,4 +115,12 @@ class LoginForm extends Component{
 }
 
 
-export default LoginForm;
+function mapStateToProps(state) {
+    const { authStatus } = state.authStatus;
+    return {
+        authStatus
+    };
+}
+
+export default connect(mapStateToProps)(LoginForm);
+
