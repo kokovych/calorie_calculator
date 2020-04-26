@@ -44,9 +44,12 @@ class LoginForm extends Component{
             this.props.userLoginRequest(userData).then(
                 (data) => {
                     console.log("SUCCES");
-                    let tokens = data.data;
-                    console.log(tokens);
+                    let accessToken = data.data.access;
+                    let refreshToken = data.data.refresh;
+                    localStorage.setItem('userAccessToken', accessToken);
+                    localStorage.setItem('userRefreshToken', refreshToken);
                     this.setState({errors: {}, isLoading: false});
+                    this.props.history.push('/');
                 },
                 (err) => {
                     console.log("error :) ");

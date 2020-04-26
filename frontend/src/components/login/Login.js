@@ -13,7 +13,7 @@ class LoginPage extends Component {
         return (
             <div className="row">
                 <h1>This is login page</h1>
-                <LoginForm userLoginRequest={userLoginRequest} />
+                <LoginForm userLoginRequest={userLoginRequest} history={this.props.history} />
             </div>
         );
     }
