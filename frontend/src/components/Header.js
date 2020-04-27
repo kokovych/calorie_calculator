@@ -1,23 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import LoginPage from './login/Login'
+import { Link } from "react-router-dom";
 
 
-function HomePage() {
+function Header() {
     return (
-        <div>
-            <h2>Home</h2>
-            <div>
-                this is home page content!!! :) cool
-            </div>
-        </div>
-    )
-}
-
-
-function AppRouter() {
-    return (
-        <Router>
             <div>
                 <nav className="navbar navbar-default">
                     <ul>
@@ -38,15 +24,8 @@ function AppRouter() {
                         </li>
                     </ul>
                 </nav>
-
-                <Route exact path="/" component={HomePage} />
-                <Route path="/login/" component={LoginPage} />
-                <Route path="/registration/" component={HomePage} />
-                <Route path="/logout/" component={HomePage} />
             </div>
-
-        </Router>
     );
 }
 
-export default AppRouter;
+export default Header;
