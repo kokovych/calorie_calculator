@@ -1,11 +1,26 @@
 import React, {Component} from "react";
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+
+import {logout} from '../actions/LoginActions';
 
 
 class Header extends (Component) {
     constructor(props){
         super(props);
+
+        this.logoutUser = this.logoutUser.bind(this);
     }
+
+    logoutUser(e){
+        e.preventDefault();
+        console.log('processing...');
+        console.log(this.props);
+        this.props.logout();
+        window.location.reload();
+
+    }
+
     render(){
         console.log('in HEader');
         console.log(this.props);
@@ -17,7 +32,7 @@ class Header extends (Component) {
                     <a href="/admin/"  target="_blank">ADMIN PAGE</a>
                 </li>
                 <li>
-                    <Link to="/logout/">Logout</Link>
+                    <a href="#" onClick={this.logoutUser}>Logout</a>
                 </li>
             </div>
         );
@@ -45,4 +60,10 @@ class Header extends (Component) {
 
 }
 
-export default Header;
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
+}
+
+export default connect(null, { logout })(Header);

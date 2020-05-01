@@ -30,7 +30,7 @@ class App extends Component {
                     <Route exact path="/" component={hasAccessToken? UserHomePage: GuestHomePage}/>
                     <Route path="/login/" component={LoginPage} hasAccessToken={hasAccessToken}/>
                     <Route path="/registration/" component={SignUp} />
-                    <Route path="/logout/" component={GuestHomePage} />
+                    <Route path="/logout/" />
                 </BrowserRouter>
             </div>
     );

@@ -25,7 +25,7 @@ export function authStatus (state = initialState, action = {}){
             return{
                 isAuthenticated: isAuth,
                 userToken: action.token,
-                hasAccessToken: true
+                hasAccessToken: isAuth
             }
     }
     return state
