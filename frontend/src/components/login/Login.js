@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import LoginForm from './LoginForm';
-import  userLoginRequest  from '../../actions/LoginAction'
+import  userLoginRequest  from '../../actions/LoginAction';
+import  getAccessTokenStatus  from '../../actions/verifyTokenAction';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
@@ -9,7 +10,10 @@ import { Link } from "react-router-dom";
 class LoginPage extends Component {
     render() {
         const { userLoginRequest } = this.props;
-        console.log('this.props');
+        // const { getAccessTokenStatus } = this.props;
+        let d = getAccessTokenStatus();
+        console.log(d);
+        console.log('this.props LOGIN');
         console.log(this.props);
         return (
             <div className="row">
@@ -22,9 +26,17 @@ class LoginPage extends Component {
     }
 }
 
-LoginPage.propTypes = {
-    userLoginRequest: PropTypes.func.isRequired,
-};
+// LoginPage.propTypes = {
+//     userLoginRequest: PropTypes.func.isRequired,
+// };
 
 
-export default connect(null, { userLoginRequest})(LoginPage);
+function mapStateToProps(state) {
+    const { authStatus } = state.authStatus;
+    return {
+        authStatus
+    };
+}
+
+
+export default connect(mapStateToProps, { userLoginRequest})(LoginPage);

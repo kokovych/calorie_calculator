@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import {setCurrentUser} from "../../actions/LoginAction"
-import {SET_CURRENT_USER} from "../../constants"
 import InputFieldGroup from '../common/InputFieldGroup'
 import validateLoginForm from '../../validations/login'
 
@@ -65,6 +64,7 @@ class LoginForm extends Component{
                     this.setState({errors: {}, isLoading: false});
                     this.props.history.push('/');
                     console.log('after push /');
+                    window.location.reload();
 
                 },
                 (err) => {

@@ -5,7 +5,8 @@ import isEmpty from 'lodash/isEmpty';
 
 const initialState = {
   isAuthenticated: false,
-  user: {}
+  userToken: '',
+  hasAccessToken: false
 };
 
 
@@ -20,9 +21,11 @@ export function authStatus (state = initialState, action = {}){
             console.log("SET_CURRENT_USER reducer!");
             console.log(state);
             console.log(action);
+            let isAuth = action.token.length > 0 ? true : false;
             return{
-                isAuthenticated: true,
-                userToken: action.token
+                isAuthenticated: isAuth,
+                userToken: action.token,
+                hasAccessToken: true
             }
     }
     return state
