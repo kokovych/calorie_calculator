@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import {setCurrentUser} from "../../actions/LoginAction"
+import {setCurrentUser} from "../../actions/LoginActions"
 import InputFieldGroup from '../common/InputFieldGroup'
 import validateLoginForm from '../../validations/login'
+import setAuthorizationToken from '../../utils/setAuthorizationToken'
 
 
 class LoginForm extends Component{
@@ -61,6 +62,7 @@ class LoginForm extends Component{
                     localStorage.setItem('userAccessToken', accessToken);
                     localStorage.setItem('userRefreshToken', refreshToken);
                     dispatch(setCurrentUser(accessToken));
+                    setAuthorizationToken(accessToken);
                     this.setState({errors: {}, isLoading: false});
                     this.props.history.push('/');
                     console.log('after push /');
