@@ -10,11 +10,16 @@ import { Link } from "react-router-dom";
 class LoginPage extends Component {
     render() {
         const { userLoginRequest } = this.props;
-        // const { getAccessTokenStatus } = this.props;
-        let d = getAccessTokenStatus();
-        console.log(d);
+        let {hasAccessToken} = getAccessTokenStatus();
         console.log('this.props LOGIN');
-        console.log(this.props);
+        console.log(hasAccessToken);
+        if(hasAccessToken){
+            return(
+                <div>
+                    <h3>You are already logged in!</h3>
+                </div>
+            )
+        }
         return (
             <div className="row">
                 <h1>This is login page</h1>
@@ -26,9 +31,9 @@ class LoginPage extends Component {
     }
 }
 
-// LoginPage.propTypes = {
-//     userLoginRequest: PropTypes.func.isRequired,
-// };
+LoginPage.propTypes = {
+    userLoginRequest: PropTypes.func.isRequired,
+};
 
 
 function mapStateToProps(state) {
