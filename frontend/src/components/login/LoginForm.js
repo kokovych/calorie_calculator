@@ -86,6 +86,8 @@ class LoginForm extends Component{
 
     render (){
         const { errors } = this.state;
+        console.log('in render loginForm');
+        console.log(this.props);
         return (
             <form onSubmit={this.onSubmit}>
                 <h2>Login form again here:</h2>

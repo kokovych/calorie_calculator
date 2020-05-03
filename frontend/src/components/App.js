@@ -9,13 +9,13 @@ import SignUp from '../components/registration/SignUp';
 import Header from './Header';
 
 class App extends Component {
-    constructor(props){
-        super(props);
-    }
+    // constructor(props){
+    //     super(props);
+    // }
 
     render() {
         console.log('in APP');
-        const { dispatch } = this.props;
+        // const { dispatch } = this.props;
         console.log(this.props);
         let userAccessToken = localStorage.getItem('userAccessToken');
         console.log(userAccessToken);
@@ -37,11 +37,12 @@ class App extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    const { authStatus } = state.authStatus;
-    return {
-        authStatus
-    };
-}
+// function mapStateToProps(state) {
+//     const { authStatus } = state.authStatus;
+//     console.log('hello');
+//     return {
+//         authStatus
+//     };
+// }
 
-export default connect(mapStateToProps)(App);
+export default connect(null)(App);
