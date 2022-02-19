@@ -3,7 +3,7 @@ from django.contrib import admin
 from .models import Product, DayCalories, UserPortion, UserWeight
 
 # Register your models here.
-
+#
 
 class DayCaloriesInline(admin.TabularInline):
     model = DayCalories.user_portion.through
