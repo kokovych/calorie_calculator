@@ -89,6 +89,16 @@ class DayCalories(models.Model):
         )
 
 
+class UserWeight(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    weight = models.FloatField(default=0)
+    added_day = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField()
+
+    def __str__(self):
+        return '{title}'.format(title=self.user.name)
+
+
 @receiver(post_save, sender=UserPortion)# the sender is your fix
 def auto_create_or_update_day_calories(sender, instance, **kwargs):
     created = kwargs.get('created')

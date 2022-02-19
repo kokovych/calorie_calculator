@@ -22,6 +22,9 @@ export default function helloRequest() {
                 // headers: authHeader()
             };
 
+        console.log(axios);
+        console.log(axios.defaults);
+
         axios.get(HELLO_URL)
             .then(
                 (resp) => {

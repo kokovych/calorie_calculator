@@ -66,7 +66,7 @@ class LoginForm extends Component{
                     this.setState({errors: {}, isLoading: false});
                     this.props.history.push('/');
                     console.log('after push /');
-                    window.location.reload();
+                    // window.location.reload();
 
                 },
                 (err) => {

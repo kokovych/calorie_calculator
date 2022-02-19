@@ -1,6 +1,6 @@
 from datetime import date
 from django.contrib import admin
-from .models import Product, DayCalories, UserPortion
+from .models import Product, DayCalories, UserPortion, UserWeight
 
 # Register your models here.
 
@@ -12,9 +12,17 @@ class DayCaloriesInline(admin.TabularInline):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = [ 'title', 'calories', 'id']
+    list_display = ['title', 'calories', 'id']
     readonly_fields = ('added_day', 'edited_day')
     search_fields = ['title']
+    
+
+@admin.register(UserWeight)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ['user', 'date', 'id']
+    readonly_fields = ('added_day', )
+    search_fields = ['user']
+    list_filter = ['date', ]
 
 
 @admin.register(UserPortion)
@@ -32,6 +40,7 @@ class DayCaloriesAdmin(admin.ModelAdmin):
     readonly_fields = ('added_day', 'sum_calories', 'total_nutrients')
     filter_horizontal = ('user_portion', )
     list_filter = ['day', ]
+    list_per_page = 10
     # inlines = (DayCaloriesInline,)
     # exclude = ('user_portion',)
     # raw_id_fields = ('user_portion', )

@@ -26,7 +26,7 @@ SECRET_KEY = 'v7--!$!xuqcuyzkbf1j97t3jne%r^#aizi%l99vvs3q=9e#x3-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','192.168.1.104', '192.168.1.255', '192.168.1.104:8008']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'calorie',
     'django_extensions',
+    # 'dark',
 ]
 
 MIDDLEWARE = [
