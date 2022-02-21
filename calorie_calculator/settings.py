@@ -12,10 +12,11 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import sys
 import os
+import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+environ.Env.read_env(env_file=os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -26,7 +27,7 @@ SECRET_KEY = 'v7--!$!xuqcuyzkbf1j97t3jne%r^#aizi%l99vvs3q=9e#x3-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','192.168.1.104', '192.168.1.255', '192.168.1.104:8008']
+ALLOWED_HOSTS = ['127.0.0.1','192.168.1.104', '192.168.1.255', '192.168.1.104:8008', '*']
 
 
 # Application definition
@@ -88,16 +89,16 @@ WSGI_APPLICATION = 'calorie_calculator.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'calorie',
-        'USER': 'calorie',
-        'PASSWORD': 'calorie',
-        'HOST': '127.0.0.1',
+        'NAME': os.environ.get('DB_NAME', ''),
+        'USER': os.environ.get('DB_USER', ''),
+        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+        'HOST': os.environ.get('DB_HOST', ''),
         'PORT': '5432',
-        'TEST': {
-            'NAME': 'test_calorie',
-            'USER': 'test_calorie',
-            'PASSWORD': 'test_calorie',
-        }
+        # 'TEST': {
+        #     'NAME': 'test_calorie',
+        #     'USER': 'test_calorie',
+        #     'PASSWORD': 'test_calorie',
+        # }
     }
 }
 
