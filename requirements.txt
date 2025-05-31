@@ -1,7 +1,7 @@
-Django==3.1.13
-django-cors-headers==3.2.1
-django-extensions==2.2.9
-djangorestframework==3.11.0
+Django
+django-cors-headers
+django-extensions
+djangorestframework
 django-environ
 psycopg2-binary
 djangorestframework-simplejwt
