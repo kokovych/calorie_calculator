@@ -12,7 +12,7 @@ class DayCaloriesInline(admin.TabularInline):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'calories', 'id']
+    list_display = ['title', 'calories', 'proteins', 'fats', 'carbohydrates', 'id']
     readonly_fields = ('added_day', 'edited_day')
     search_fields = ['title']
     
@@ -27,11 +27,18 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(UserPortion)
 class UserPortionAdmin(admin.ModelAdmin):
-    list_display = ['product', 'id', 'weight', 'user', 'eating', 'date']
+    list_display = ['product', 'id', 'weight', 'user_portion_calories', 'portion_nutrients', 'date']
     readonly_fields = ('added_day', )
     list_filter = ['added_day', 'eating', 'user']
     search_fields = ['product__title']
     autocomplete_fields = ('product', )
+
+    def user_portion_calories(self, obj):
+        return obj.user_portion_calories()
+
+    def portion_nutrients(self, obj):
+        return obj.portion_nutrients()
+
 
 
 @admin.register(DayCalories)

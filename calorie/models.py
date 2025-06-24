@@ -50,6 +50,22 @@ class UserPortion(models.Model):
             eating=eating
         )
 
+    def user_portion_calories(self):
+        total_calories = (self.weight / 100) * self.product.calories
+        return '{total_calories:.2f}'.format(
+            total_calories=total_calories
+        )
+
+    def portion_nutrients(self):
+        total_proteins = (self.weight/100) * self.product.proteins
+        total_fats = (self.weight/100) * self.product.fats
+        total_carbohydrates = (self.weight/100) * self.product.carbohydrates
+        return 'Proteins: {total_proteins:.2f};\nFats: {total_fats:.2f}; \nCarbohydrates: {total_carbohydrates:.2f}'.format(
+            total_proteins=total_proteins,
+            total_fats=total_fats,
+            total_carbohydrates=total_carbohydrates,
+        )
+
 
 class DayCalories(models.Model):
     user_portion = models.ManyToManyField(UserPortion)
@@ -78,14 +94,17 @@ class DayCalories(models.Model):
         total_proteins = 0
         total_fats = 0
         total_carbohydrates = 0
+        total_weight = 0
         for item in all_portions:
             total_proteins = total_proteins + (item.weight/100) * item.product.proteins
             total_fats = total_fats + (item.weight/100) * item.product.fats
             total_carbohydrates = total_carbohydrates + (item.weight/100) * item.product.carbohydrates
-        return 'Proteins: {total_proteins:.2f};\nFats: {total_fats:.2f}; \nCarbohydrates: {total_carbohydrates:.2f};'.format(
+            total_weight = total_weight + item.weight
+        return 'Proteins: {total_proteins:.2f};\nFats: {total_fats:.2f}; \nCarbohydrates: {total_carbohydrates:.2f}; \nWeight: {total_weight:.2f};'.format(
             total_proteins=total_proteins,
             total_fats=total_fats,
-            total_carbohydrates=total_carbohydrates
+            total_carbohydrates=total_carbohydrates,
+            total_weight=total_weight,
         )
 
 
