@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils import timezone
 
 # Create your models here.
 
@@ -12,6 +13,18 @@ FOOD_TYPE_TIME = (
     (3, "Вечеря"),
     (4, "Перекус"),
 )
+
+
+
+def default_eating():
+    now = timezone.localtime().time()
+    if now >= timezone.datetime.strptime("06:00", "%H:%M").time() and now <= timezone.datetime.strptime("10:00", "%H:%M").time():
+        return 1  # Сніданок
+    elif now >= timezone.datetime.strptime("12:00", "%H:%M").time() and now <= timezone.datetime.strptime("14:00", "%H:%M").time():
+        return 2  # Обід
+    elif now >= timezone.datetime.strptime("17:00", "%H:%M").time() and now <= timezone.datetime.strptime("20:00", "%H:%M").time():
+        return 3  # Вечеря
+    return 4  # Перекус
 
 
 class Product(models.Model):
@@ -35,8 +48,9 @@ class UserPortion(models.Model):
     weight = models.FloatField(default=0)
     user = models.ForeignKey(User, blank=False,  on_delete=models.CASCADE, default=1)
     added_day = models.DateTimeField(auto_now_add=True)
-    date = models.DateTimeField()
-    eating = models.IntegerField(choices=FOOD_TYPE_TIME, default=4)
+    # date should be auto_now_add=True, but possibly user want to add portion for another day:
+    date = models.DateTimeField(default=timezone.now)
+    eating = models.IntegerField(choices=FOOD_TYPE_TIME, default=default_eating)
 
     def __str__(self):
         weight = '{weight} gr'.format(weight=self.weight)
